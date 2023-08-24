@@ -1,6 +1,7 @@
 using DataAccessLibrary.DataAccess;
 using DataAccessLibrary.Interfaces;
 using DataAccessLibrary.Repository;
+using MinimalApi.Endpoints;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -12,8 +13,12 @@ WebApplication app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.EnableTryItOutByDefault();
+    });
 }
 
 app.UseHttpsRedirection();
+app.AddPersonApiEndpoints();
 app.Run();
