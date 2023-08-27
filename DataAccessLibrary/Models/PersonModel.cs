@@ -2,7 +2,7 @@
 
 namespace DataAccessLibrary.Models;
 
-public class PersonModel
+public sealed class PersonModel
 {
     public int Id { get; set; }
 

@@ -5,7 +5,7 @@ using System.Data;
 
 namespace DataAccessLibrary.Repository;
 
-public class PersonRepository : IPersonRepository
+public sealed class PersonRepository : IPersonRepository
 {
     private readonly IDataAccess _db;
 

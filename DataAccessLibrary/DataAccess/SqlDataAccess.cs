@@ -6,7 +6,7 @@ using System.Data;
 
 namespace DataAccessLibrary.DataAccess;
 
-public class SqlDataAccess : IDataAccess
+public sealed class SqlDataAccess : IDataAccess
 {
     private readonly IConfiguration _config;
 
