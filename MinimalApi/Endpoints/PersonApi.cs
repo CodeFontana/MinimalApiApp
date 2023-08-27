@@ -14,7 +14,7 @@ public static class PersonApi
         app.MapDelete("/Person/{id}", Delete);
     }
 
-    private static async Task<IResult> ReadAll(IPersonRepository db)
+    private static async Task<IResult> ReadAllAsync(IPersonRepository db)
     {
         try
         {
@@ -27,7 +27,7 @@ public static class PersonApi
         }
     }
 
-    private static async Task<IResult> Read(IPersonRepository db, int id)
+    private static async Task<IResult> ReadAsync(IPersonRepository db, int id)
     {
         try
         {
@@ -46,7 +46,7 @@ public static class PersonApi
         }
     }
 
-    private static async Task<IResult> Create(IPersonRepository db, PersonModel person)
+    private static async Task<IResult> CreateAsync(IPersonRepository db, PersonModel person)
     {
         try
         {
@@ -59,7 +59,7 @@ public static class PersonApi
         }
     }
 
-    private static async Task<IResult> Update(IPersonRepository db, PersonModel person)
+    private static async Task<IResult> UpdateAsync(IPersonRepository db, PersonModel person)
     {
         try
         {
@@ -72,7 +72,7 @@ public static class PersonApi
         }
     }
 
-    private static async Task<IResult> Delete(IPersonRepository db, int id)
+    private static async Task<IResult> DeleteAsync(IPersonRepository db, int id)
     {
         try
         {
