@@ -1,8 +1,8 @@
 ﻿using Dapper;
 using DataAccessLibrary.Interfaces;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace DataAccessLibrary.DataAccess;
 
