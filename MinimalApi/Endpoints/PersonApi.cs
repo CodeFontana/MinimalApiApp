@@ -18,7 +18,7 @@ public static class PersonApi
     {
         try
         {
-            IEnumerable<PersonModel> result = await db.ReadAll();
+            IEnumerable<PersonModel> result = await db.ReadAllAsync();
             return Results.Ok(result);
         }
         catch (Exception e)
@@ -31,7 +31,7 @@ public static class PersonApi
     {
         try
         {
-            PersonModel? result = await db.Read(id);
+            PersonModel? result = await db.ReadAsync(id);
 
             if (result is null)
             {
@@ -63,7 +63,7 @@ public static class PersonApi
     {
         try
         {
-            await db.Update(person);
+            await db.UpdateAsync(person);
             return Results.Ok();
         }
         catch (Exception e)
@@ -76,7 +76,7 @@ public static class PersonApi
     {
         try
         {
-            await db.Delete(id);
+            await db.DeleteAsync(id);
             return Results.Ok();
         }
         catch (Exception e)

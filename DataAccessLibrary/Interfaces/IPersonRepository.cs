@@ -4,8 +4,8 @@ namespace DataAccessLibrary.Interfaces;
 public interface IPersonRepository
 {
     Task<int> Create(PersonModel person);
-    Task Delete(int id);
-    Task<PersonModel?> Read(int id);
-    Task<IEnumerable<PersonModel>> ReadAll();
-    Task Update(PersonModel person);
+    Task DeleteAsync(int id);
+    Task<PersonModel?> ReadAsync(int id);
+    Task<IEnumerable<PersonModel>> ReadAllAsync();
+    Task UpdateAsync(PersonModel person);
 }

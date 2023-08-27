@@ -24,27 +24,30 @@ public sealed class PersonRepository : IPersonRepository
         return p.Get<int>("Id");
     }
 
-    public async Task<PersonModel?> Read(int id)
+    public async Task<PersonModel?> ReadAsync(int id)
     {
         IEnumerable<PersonModel> result = await _db.LoadDataAsync<PersonModel, dynamic>(
-            "dbo.spPerson_Read", new { Id = id }, "Default");
+            "dbo.spPerson_Read", 
+            new { Id = id }, 
+            "Default");
         return result.FirstOrDefault();
     }
 
-    public async Task<IEnumerable<PersonModel>> ReadAll()
+    public Task<IEnumerable<PersonModel>> ReadAllAsync()
     {
-        IEnumerable<PersonModel> result = await _db.LoadDataAsync<PersonModel, dynamic>(
-            "dbo.spPerson_ReadAll", new { }, "Default");
-        return result;
+        return _db.LoadDataAsync<PersonModel, dynamic>(
+            "dbo.spPerson_ReadAll", 
+            new { }, 
+            "Default");
     }
 
-    public async Task Update(PersonModel person)
+    public Task UpdateAsync(PersonModel person)
     {
-        await _db.SaveDataAsync("dbo.spPerson_Update", person, "Default");
+        return _db.SaveDataAsync("dbo.spPerson_Update", person, "Default");
     }
 
-    public async Task Delete(int id)
+    public Task DeleteAsync(int id)
     {
-        await _db.SaveDataAsync("dbo.spPerson_Delete", new { Id = id }, "Default");
+        return _db.SaveDataAsync("dbo.spPerson_Delete", new { Id = id }, "Default");
     }
 }
