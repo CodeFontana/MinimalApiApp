@@ -8,10 +8,10 @@ public static class PersonApi
     public static void AddPersonApiEndpoints(this WebApplication app)
     {
         app.MapGet("/People", ReadAllAsync);
-        app.MapGet("/Person/{id}", ReadAsync);
+        app.MapGet("/Person/{id:int}", ReadAsync);
         app.MapPost("/Person", CreateAsync);
         app.MapPut("/Person", UpdateAsync);
-        app.MapDelete("/Person/{id}", DeleteAsync);
+        app.MapDelete("/Person/{id:int}", DeleteAsync);
     }
 
     private static async Task<IResult> ReadAllAsync(IPersonRepository db)
