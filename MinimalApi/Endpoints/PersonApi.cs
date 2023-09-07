@@ -7,11 +7,11 @@ public static class PersonApi
 {
     public static void AddPersonApiEndpoints(this WebApplication app)
     {
-        app.MapGet("/People", ReadAllAsync);
-        app.MapGet("/Person/{id:int}", ReadAsync);
-        app.MapPost("/Person", CreateAsync);
-        app.MapPut("/Person", UpdateAsync);
-        app.MapDelete("/Person/{id:int}", DeleteAsync);
+        app.MapGet("/api/v1/People", ReadAllAsync);
+        app.MapGet("/api/v1/Person/{id:int}", ReadAsync);
+        app.MapPost("/api/v1/Person", CreateAsync);
+        app.MapPut("/api/v1/Person", UpdateAsync);
+        app.MapDelete("/api/v1/Person/{id:int}", DeleteAsync);
     }
 
     private static async Task<IResult> ReadAllAsync(IPersonRepository db)
