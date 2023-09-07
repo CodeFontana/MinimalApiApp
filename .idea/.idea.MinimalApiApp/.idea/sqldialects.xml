@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/PersonDb/dbo/StoredProcedures/spPerson_Create.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/PersonDb/dbo/StoredProcedures/spPerson_Delete.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/PersonDb/dbo/StoredProcedures/spPerson_Read.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/PersonDb/dbo/StoredProcedures/spPerson_ReadAll.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/PersonDb/dbo/StoredProcedures/spPerson_Update.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/PersonDb/dbo/Tables/Person.sql" dialect="TSQL" />
+  </component>
+</project>
