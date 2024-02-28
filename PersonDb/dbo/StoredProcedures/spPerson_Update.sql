@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[spPerson_Update]
+﻿create procedure [dbo].[spPerson_Update]
 	@Id int,
 	@FirstName nvarchar(50),
 	@LastName nvarchar(50)
-AS
+as
 begin
 	update dbo.Person
 	set FirstName = @FirstName,

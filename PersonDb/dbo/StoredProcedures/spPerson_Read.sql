@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[spPerson_Read]
+﻿create procedure [dbo].[spPerson_Read]
 	@Id int
-AS
+as
 begin
 	select Id, FirstName, LastName, Created, CreatedBy, Modified, ModifiedBy
 	from dbo.Person 

@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[spPerson_Delete]
+﻿create procedure [dbo].[spPerson_Delete]
 	@Id int
-AS
+as
 begin
 	delete from dbo.Person
 	where Id = @Id;
