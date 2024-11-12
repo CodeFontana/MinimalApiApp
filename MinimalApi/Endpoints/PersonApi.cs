@@ -7,11 +7,11 @@ public static class PersonApi
 {
     public static void AddPersonApiEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/v1/People", ReadAllAsync);
-        app.MapGet("/api/v1/Person/{id:int}", ReadAsync);
-        app.MapPost("/api/v1/Person", CreateAsync);
-        app.MapPut("/api/v1/Person", UpdateAsync);
-        app.MapDelete("/api/v1/Person/{id:int}", DeleteAsync);
+        app.MapGet("/api/v1/People", ReadAllAsync).RequireRateLimiting("fixed");
+        app.MapGet("/api/v1/Person/{id:int}", ReadAsync).RequireRateLimiting("fixed"); ;
+        app.MapPost("/api/v1/Person", CreateAsync).RequireRateLimiting("fixed"); ;
+        app.MapPut("/api/v1/Person", UpdateAsync).RequireRateLimiting("fixed"); ;
+        app.MapDelete("/api/v1/Person/{id:int}", DeleteAsync).RequireRateLimiting("fixed"); ;
     }
 
     private static async Task<IResult> ReadAllAsync(IPersonRepository db)
@@ -26,7 +26,7 @@ public static class PersonApi
             return Results.Problem(
                 type: "Internal Server Error",
                 title: "An error occurred while reading all people",
-                detail: e.Message, 
+                detail: e.Message,
                 statusCode: StatusCodes.Status500InternalServerError);
         }
     }
@@ -37,8 +37,8 @@ public static class PersonApi
         {
             PersonModel? result = await db.ReadAsync(id);
 
-            return result is null 
-                ? Results.NotFound() 
+            return result is null
+                ? Results.NotFound()
                 : Results.Ok(result);
         }
         catch (Exception e)
@@ -46,7 +46,7 @@ public static class PersonApi
             return Results.Problem(
                 type: "Internal Server Error",
                 title: "An error occurred while reading a person",
-                detail: e.Message, 
+                detail: e.Message,
                 statusCode: StatusCodes.Status500InternalServerError);
         }
     }
@@ -63,7 +63,7 @@ public static class PersonApi
             return Results.Problem(
                 type: "Internal Server Error",
                 title: "An error occurred while creating a new person",
-                detail: e.Message, 
+                detail: e.Message,
                 statusCode: StatusCodes.Status500InternalServerError);
         }
     }
@@ -80,7 +80,7 @@ public static class PersonApi
             return Results.Problem(
                 type: "Internal Server Error",
                 title: "An error occurred while updating a person",
-                detail: e.Message, 
+                detail: e.Message,
                 statusCode: StatusCodes.Status500InternalServerError);
         }
     }
@@ -97,7 +97,7 @@ public static class PersonApi
             return Results.Problem(
                 type: "Internal Server Error",
                 title: "An error occurred while deleting a person",
-                detail: e.Message, 
+                detail: e.Message,
                 statusCode: StatusCodes.Status500InternalServerError);
         }
     }
