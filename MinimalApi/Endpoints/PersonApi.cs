@@ -7,11 +7,31 @@ public static class PersonApi
 {
     public static void AddPersonApiEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/v1/People", ReadAllAsync).RequireRateLimiting("fixed");
-        app.MapGet("/api/v1/Person/{id:int}", ReadAsync).RequireRateLimiting("fixed"); ;
-        app.MapPost("/api/v1/Person", CreateAsync).RequireRateLimiting("fixed"); ;
-        app.MapPut("/api/v1/Person", UpdateAsync).RequireRateLimiting("fixed"); ;
-        app.MapDelete("/api/v1/Person/{id:int}", DeleteAsync).RequireRateLimiting("fixed"); ;
+        app.MapGet("/api/v1/People", ReadAllAsync)
+            .Produces(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status500InternalServerError)
+            .RequireRateLimiting("fixed");
+
+        app.MapGet("/api/v1/Person/{id:int}", ReadAsync)
+            .Produces(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound)
+            .Produces(StatusCodes.Status500InternalServerError)
+            .RequireRateLimiting("fixed");
+
+        app.MapPost("/api/v1/Person", CreateAsync)
+            .Produces(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status500InternalServerError)
+            .RequireRateLimiting("fixed");
+
+        app.MapPut("/api/v1/Person", UpdateAsync)
+            .Produces(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status500InternalServerError)
+            .RequireRateLimiting("fixed");
+
+        app.MapDelete("/api/v1/Person/{id:int}", DeleteAsync)
+            .Produces(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status500InternalServerError)
+            .RequireRateLimiting("fixed");
     }
 
     private static async Task<IResult> ReadAllAsync(IPersonRepository db)
@@ -56,7 +76,7 @@ public static class PersonApi
         try
         {
             int result = await db.Create(person);
-            return Results.Ok(result);
+            return Results.Created($"/api/v1/Person/{result}", result);
         }
         catch (Exception e)
         {
