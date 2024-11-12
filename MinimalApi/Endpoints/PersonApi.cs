@@ -23,7 +23,11 @@ public static class PersonApi
         }
         catch (Exception e)
         {
-            return Results.Problem(e.Message, statusCode: 500);
+            return Results.Problem(
+                type: "Internal Server Error",
+                title: "An error occurred while reading all people",
+                detail: e.Message, 
+                statusCode: StatusCodes.Status500InternalServerError);
         }
     }
 
@@ -33,16 +37,17 @@ public static class PersonApi
         {
             PersonModel? result = await db.ReadAsync(id);
 
-            if (result is null)
-            {
-                return Results.NotFound();
-            }
-            
-            return Results.Ok(result);
+            return result is null 
+                ? Results.NotFound() 
+                : Results.Ok(result);
         }
         catch (Exception e)
         {
-            return Results.Problem(e.Message, statusCode: 500);
+            return Results.Problem(
+                type: "Internal Server Error",
+                title: "An error occurred while reading a person",
+                detail: e.Message, 
+                statusCode: StatusCodes.Status500InternalServerError);
         }
     }
 
@@ -55,7 +60,11 @@ public static class PersonApi
         }
         catch (Exception e)
         {
-            return Results.Problem(e.Message, statusCode: 500);
+            return Results.Problem(
+                type: "Internal Server Error",
+                title: "An error occurred while creating a new person",
+                detail: e.Message, 
+                statusCode: StatusCodes.Status500InternalServerError);
         }
     }
 
@@ -68,7 +77,11 @@ public static class PersonApi
         }
         catch (Exception e)
         {
-            return Results.Problem(e.Message, statusCode: 500);
+            return Results.Problem(
+                type: "Internal Server Error",
+                title: "An error occurred while updating a person",
+                detail: e.Message, 
+                statusCode: StatusCodes.Status500InternalServerError);
         }
     }
 
@@ -81,7 +94,11 @@ public static class PersonApi
         }
         catch (Exception e)
         {
-            return Results.Problem(e.Message, statusCode: 500);
+            return Results.Problem(
+                type: "Internal Server Error",
+                title: "An error occurred while deleting a person",
+                detail: e.Message, 
+                statusCode: StatusCodes.Status500InternalServerError);
         }
     }
 }
