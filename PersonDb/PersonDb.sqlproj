@@ -75,4 +75,7 @@
   <ItemGroup>
     <None Include="PersonDb.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="PersonDb.refactorlog" />
+  </ItemGroup>
 </Project>

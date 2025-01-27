@@ -7,7 +7,7 @@ begin
 	update dbo.Person
 	set FirstName = @FirstName,
 		LastName = @LastName,
-		Modified = GETUTCDATE(),
-		ModifiedBy = SUSER_SNAME()
+		[Updated] = GETUTCDATE(),
+		[UpdatedBy] = SUSER_SNAME()
 	where Id = @Id;
 end
