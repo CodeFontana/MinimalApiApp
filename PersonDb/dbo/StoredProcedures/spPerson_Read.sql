@@ -2,7 +2,7 @@
 	@Id int
 as
 begin
-	select Id, FirstName, LastName, Created, CreatedBy, Modified, ModifiedBy
+	select Id, FirstName, LastName, Created, CreatedBy, [Updated], [UpdatedBy]
 	from dbo.Person 
 	where Id = @Id;
 end
