@@ -1,6 +1,6 @@
 ﻿using DataAccessLibrary.Models;
 
-namespace DataAccessLibrary.Interfaces;
+namespace DataAccessLibrary.Repository;
 public interface IPersonRepository
 {
     Task<int> Create(PersonModel person);

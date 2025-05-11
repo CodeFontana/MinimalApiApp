@@ -1,5 +1,5 @@
-﻿using DataAccessLibrary.Interfaces;
-using DataAccessLibrary.Models;
+﻿using DataAccessLibrary.Models;
+using DataAccessLibrary.Repository;
 
 namespace MinimalApi.Endpoints;
 

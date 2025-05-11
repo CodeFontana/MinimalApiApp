@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using Dapper;
-using DataAccessLibrary.Interfaces;
+using DataAccessLibrary.DataAccess;
 using DataAccessLibrary.Models;
 using Microsoft.Extensions.Configuration;
 

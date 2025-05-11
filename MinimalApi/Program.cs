@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Net.Mime;
 using System.Threading.RateLimiting;
 using DataAccessLibrary.DataAccess;
-using DataAccessLibrary.Interfaces;
 using DataAccessLibrary.Repository;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.RateLimiting;
