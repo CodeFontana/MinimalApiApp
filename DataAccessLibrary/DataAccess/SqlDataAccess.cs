@@ -10,7 +10,7 @@ public sealed class SqlDataAccess : IDataAccess
 {
     public async Task<T> QueryFirstAsync<T, U>(string storedProcedure, U parameters, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         T result = await connection.QueryFirstAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return result;
     }
@@ -26,7 +26,7 @@ public sealed class SqlDataAccess : IDataAccess
 
     public async Task<T?> QueryFirstOrDefaultAsync<T, U>(string storedProcedure, U parameters, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         T? result = await connection.QueryFirstOrDefaultAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return result;
     }
@@ -42,7 +42,7 @@ public sealed class SqlDataAccess : IDataAccess
 
     public async Task<T> QuerySingleAsync<T, U>(string storedProcedure, U parameters, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         T result = await connection.QuerySingleAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return result;
     }
@@ -58,7 +58,7 @@ public sealed class SqlDataAccess : IDataAccess
 
     public async Task<T?> QuerySingleOrDefaultAsync<T, U>(string storedProcedure, U parameters, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         T? result = await connection.QuerySingleOrDefaultAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return result;
     }
@@ -74,7 +74,7 @@ public sealed class SqlDataAccess : IDataAccess
 
     public async Task<IEnumerable<T>> QueryMultipleAsync<T>(string storedProcedure, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         IEnumerable<T> result = await connection.QueryAsync<T>(storedProcedure, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return result;
     }
@@ -90,7 +90,7 @@ public sealed class SqlDataAccess : IDataAccess
 
     public async Task<IEnumerable<T>> QueryMultipleAsync<T, U>(string storedProcedure, U parameters, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         IEnumerable<T> result = await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return result;
     }
@@ -106,7 +106,7 @@ public sealed class SqlDataAccess : IDataAccess
 
     public async Task<int> ExecuteAsync(string storedProcedure, DynamicParameters parameters, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         var result = await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return result;
     }
@@ -122,7 +122,7 @@ public sealed class SqlDataAccess : IDataAccess
 
     public async Task<int> ExecuteAsync<T>(string storedProcedure, T parameters, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         var result = await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return result;
     }
@@ -138,7 +138,7 @@ public sealed class SqlDataAccess : IDataAccess
 
     public async Task<T> ExecuteAsync<T>(string storedProcedure, DynamicParameters parameters, string outputParameterName, string connectionString, ushort? commandTimeout = 180)
     {
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
         return parameters.Get<T>(outputParameterName);
     }
@@ -160,7 +160,7 @@ public sealed class SqlDataAccess : IDataAccess
         parameters.Add(inputParameterName, json);
         parameters.Add(name: outputParameterName, size: Marshal.SizeOf<T>(), direction: ParameterDirection.Output);
 
-        using IDbConnection connection = new SqlConnection(connectionString);
+        await using SqlConnection connection = new(connectionString);
         await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeout);
 
         string output = parameters.Get<string>(outputParameterName);
@@ -197,7 +197,7 @@ public sealed class SqlDataAccess : IDataAccess
     {
         _ = Task.Run(async () =>
         {
-            using IDbConnection connection = new SqlConnection(connectionString);
+            await using SqlConnection connection = new(connectionString);
             await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: 180);
         });
     }
@@ -217,7 +217,7 @@ public sealed class SqlDataAccess : IDataAccess
     {
         _ = Task.Run(async () =>
         {
-            using IDbConnection connection = new SqlConnection(connectionString);
+            await using SqlConnection connection = new(connectionString);
             await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure, commandTimeout: 180);
         });
     }
