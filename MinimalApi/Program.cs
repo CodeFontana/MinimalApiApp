@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.RateLimiting;
 using MinimalApi.Endpoints;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IPersonRepository, PersonRepository>();
 builder.Services.AddProblemDetails(options =>
@@ -46,14 +44,20 @@ builder.Services.AddRateLimiter(options =>
         return new ValueTask();
     };
 });
+builder.Services.AddOpenApi();
 WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+    app.MapOpenApi();
     app.UseSwaggerUI(options =>
     {
+        options.SwaggerEndpoint("/openapi/v1.json", "Person API v1");
         options.EnableTryItOutByDefault();
+        options.ConfigObject.AdditionalItems["syntaxHighlight"] = new Dictionary<string, object>
+        {
+            ["activated"] = false
+        };
     });
 }
 
